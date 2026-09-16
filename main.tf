@@ -6,6 +6,28 @@ terraform {
   }
 }
 
+
+# terraform {
+#   cloud {
+#     organization = "policy-as-code-training"
+#     workspaces {
+#       name = "tf-vault-qa-sumit-09162026"
+#     }
+#   }
+# }
+
+terraform {
+/*
+  cloud {
+    organization = "policy-as-code-training"
+    workspaces {
+      name = "tf-vault-qa-{your-initials}"
+    }
+  }
+*/
+}
+
+
 provider "aws" {
   region  = "us-west-1"
 }
@@ -109,8 +131,8 @@ module "elb_http" {
 module "ec2_instances" {
   source = "./modules/aws-instance"
 
-  instance_count     = 2
-  instance_type      = "t2.micro"
+  instance_count     = var.instance_count
+  instance_type      = var.instance_type
   subnet_ids         = module.vpc.private_subnets[*]
   security_group_ids = [module.app_security_group.this_security_group_id]
 
