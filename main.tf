@@ -51,7 +51,7 @@ module "vpc" {
 
   tags = {
     project     = "project-alpha",
-    environment = "dev"
+    environment = "development"
   }
 }
 
